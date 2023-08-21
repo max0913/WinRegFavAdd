@@ -1,3 +1,8 @@
+# Windows Registry Favorites Paths
+
+> **Note**: This file contains a curated list of favorite paths in the Windows Registry. These paths are used by the `WinRegFavAdd` tool to add specified locations to the Registry Editor's favorites for quick access. Please ensure the paths are accurate and formatted correctly before making changes or additions. If you have suggestions or improvements, consider submitting a merge request or raising an issue in the project repository.
+
+
 | Name                                  | Path                                                           |
 |---------------------------------------|----------------------------------------------------------------|
 | Current User Personalization Settings | `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize` |
