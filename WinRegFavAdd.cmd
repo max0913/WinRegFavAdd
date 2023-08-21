@@ -1,13 +1,32 @@
 @echo off
 setlocal enabledelayedexpansion
 
-:: Path to the data file
-set "DATA_FILE=WinRegFavAdd-data.md"
+:: Define directories
+set "DATA_DIR=data-files"
 set "LOG_FILE=WinRegFavAdd-log.txt"
 
-:: Check if the data file exists
-if not exist "%DATA_FILE%" (
-    echo Data file not found: %DATA_FILE%
+:: Check if the data directory exists
+if not exist "%DATA_DIR%" (
+    echo Data directory not found: %DATA_DIR%
+    exit /b 1
+)
+
+:: List all data files and allow user to select one
+echo Please select a profile to process:
+set COUNT=0
+for %%f in ("%DATA_DIR%\*.md") do (
+    set /a COUNT+=1
+    echo !COUNT!. %%~nf
+    set "FILE_!COUNT!=%%f"
+)
+
+:: Get user selection
+set /p "SELECTION=Enter number (1 to %COUNT%): "
+set "DATA_FILE=!FILE_%SELECTION%!"
+
+:: Check if user selection is valid
+if not defined DATA_FILE (
+    echo Invalid selection.
     exit /b 1
 )
 
