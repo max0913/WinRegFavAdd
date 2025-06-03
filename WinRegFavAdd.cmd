@@ -31,9 +31,12 @@ if not defined DATA_FILE (
 )
 
 :: Process each line in the data file
-for /f "tokens=2 delims=|" %%a in ('type "%DATA_FILE%" ^| findstr /r "^[^#]"') do (
+:: Only process table rows starting with a pipe character. Trim the
+:: surrounding spaces and backticks from the extracted path.
+for /f "tokens=2 delims=|" %%a in ('type "%DATA_FILE%" ^| findstr /r "^|"') do (
     set "PATH=%%a"
     set "PATH=!PATH:~1,-1!"
+    if "!PATH:~,1!"=="`" set "PATH=!PATH:~1,-1!"
     call :AddRegistryFavorite "!PATH!"
 )
 
